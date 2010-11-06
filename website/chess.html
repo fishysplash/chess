@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<meta HTTP-EQUIV="Expires" CONTENT="-1">
+	
+	<title>chess.fishysplash.com</title>
+
+	<style type='text/css'>
+		.blackSquare
+		{
+			BORDER-TOP		: #000 solid;
+			BORDER-LEFT		: #000 solid;
+			BORDER-BOTTOM		: #000 solid;
+			BORDER-RIGHT		: #000 solid;
+			border-width		: 1px;
+			background-color	: #6e809e;
+		}
+
+		.whiteSquare
+		{
+			BORDER-TOP		: #000 solid;
+			BORDER-LEFT		: #000 solid;
+			BORDER-BOTTOM		: #000 solid;
+			BORDER-RIGHT		: #000 solid;
+			border-width		: 1px;
+			background-color	: #d1cdb8;
+		}
+		
+		#infotable
+		{
+			position	: absolute; /* Menu position that can be changed at will */
+			left		: 350px;
+			top		: 0px;
+		}
+	</style>
+	
+	<!-- javascript include files -->
+	<script src="js/chess.js"></script>
+	
+	<!-- javascript code -->
+	<script type="text/javascript">
+
+		// parses the querystring and returns value of specific item.
+		function getQueryString(key) {
+			var queryString = window.location.search.substring(1);
+			var aQueryString = queryString.split("&");
+			for (i=0; i<aQueryString.length; i++)
+			{
+				var aNameValuePair = aQueryString[i].split("=");
+				if (aNameValuePair[0].toLowerCase()==key)
+				{
+					return aNameValuePair[1];
+				}
+			}
+			return undefined;
+		}  		
+		
+		function getQueryParameters() {
+			document.forms[0].inputwhiteauto.checked=(getQueryString('whiteauto')=='1'?'checked':'');
+			document.forms[0].inputblackauto.checked=(getQueryString('blackauto')=='1'?'checked':'');
+		}
+		
+		function newGame()
+		{
+			document.forms[0].inputnewgame.value = "1";
+			processTurn();
+		}
+
+	</script>
+</head>
+
+<body>
+	<!--header-->	
+	
+	<div id="infotable">
+		<!-- chess form parameters -->
+		<form id='frmChess'>
+			<input type='text' id='inputsquarefrom' title='from'/><br />
+			<input type='text' id='inputsquareto' title='to' /><br />
+			<input type='text' id='inputcode' title='code' /><br />
+			<input type='text' id='inputstatus' title='status' /><br />
+			<input type='text' id='inputmove' title='move' /><br />
+		 	<input type='text' id='inputmoveui' title='moveui' /><br />
+			<input type='text' id='inputpieceplacement' title='pieceplacement' /><br />
+			<input type='text' id='inputcastleavailability' title='castleavailability' /><br />
+			<input type='text' id='inputenpassant' title='enpassant' /><br />
+			<input type='text' id='inputactivecolor' title='activecolor' /><br />
+			<input type='text' id='inputhalfmoveclock' title='halfmoveclock' /><br />
+			<input type='text' id='inputfullmovenumber' title='fullmovenumber' /><br />
+			<input type='checkbox' id='inputwhiteauto' value='whiteauto' title='whiteauto' /><br />
+			<input type='checkbox' id='inputblackauto' value='blackauto' title='blackauto' /><br />
+			<input type='text' id='inputnewgame' title='newgame' value='1' /><br />
+		</form>
+	</div>
+
+	<!-- the board (created programatically) -->
+	<div id="divBoard" />		
+
+</body>
+
+<head>
+<script type='text/javascript'>
+		window.onload = function() {
+			board.draw();
+			getQueryParameters();
+			document.forms[0].inputnewgame.value = "1";
+			processTurn();
+		}
+
+		document.onmousedown=dragDrop.dragHandler;
+		
+</script>
+
+</head>
+
+</html>
+
+

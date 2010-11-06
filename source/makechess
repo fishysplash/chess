@@ -1,0 +1,3 @@
+rm ./chess
+gcc -o chess main.c bitboard.c chessstate.c
+./chess
